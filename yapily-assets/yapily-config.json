@@ -1,0 +1,6 @@
+{
+  "key":"<your api key>",
+  "secret":"<your api secret>",
+  "userName": "moneyme_user",
+  "callback": "moneyme://whatever/"
+}
