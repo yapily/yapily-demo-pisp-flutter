@@ -1,6 +1,6 @@
-# Sample native app PISP Implementation from Yapily
+# Sample native app PISP implementation from Yapily
 
-A ready to use implementation of a TPP using [Yapily SDK](https://www.forgerock.com/about-us/events/2018/09/open-banking-hackathon) to connect on financial institutions
+A ready to use implementation of a TPP using [Yapily SDK](https://github.com/yapily/yapily-sdk-dart) to connect on financial institutions
 during [Forgerock Open Banking Hackathlon](https://www.forgerock.com/about-us/events/2018/09/open-banking-hackathon).
 Developed on [flutter](https://flutter.io/) native app framework.
 
@@ -27,5 +27,5 @@ For more information on how to get connected, visit the
 
 #### Disclaimer
 
-The ***MONEYME*** name was created by [Yapily](htpps://wwww.yapily.com) and should not be used outside the scope of testing this application.
+The ***MONEYME*** name was created by [Yapily](htpps://wwww.yapily.com) for testing purposes only. Should never be used outside of this scope.
 
