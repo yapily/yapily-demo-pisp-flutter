@@ -27,5 +27,5 @@ For more information on how to get connected, visit the
 
 #### Disclaimer
 
-The ***MONEYME*** name was created by [Yapily](htpps://wwww.yapily.com) for testing purposes only. Should never be used outside of this scope.
+The ***MONEYME*** name was created by [Yapily](htpps://wwww.yapily.com) for testing purposes only during the forgerock hackathon and it might not work out-of-the-box. Should never be used outside of this scope.
 
