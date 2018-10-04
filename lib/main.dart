@@ -7,8 +7,6 @@ import 'package:ipisp/edit_profile.dart';
 import 'package:ipisp/payment_details.dart';
 import 'package:ipisp/request_money.dart';
 import 'package:ipisp/send_money.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
 import 'package:ipisp/payment_request_listener.dart';
 import 'package:ipisp/application_link_listener.dart';
 import 'package:flutter/services.dart';
@@ -50,9 +48,6 @@ class _HomePageState extends State<HomePage> implements PaymentRequestListener {
 
   void handlePaymentData(data){
     if (data != null) {
-
-//      paymentRequestReceived("The data: "+ data);
-
       PaymentData paymentData = PaymentDetailsJWTParser.parseJWT(data);
 
       Navigator.push(

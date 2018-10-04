@@ -63,7 +63,7 @@ class _GenerateRequestQRState extends State<GenerateRequestQR> {
     paymentJson['recipientImageUrl'] = _recipientImage;
     var dataString = json.encode(paymentJson);
     //TODO nope :)
-    var jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." + base64.encode(utf8.encode(dataString)) + ".cTz66n83UC_2xrPZ7PGM9eFR7OLokBMtPjs-P-xlkHw";
+    var jwt = "yourJWTheader." + base64.encode(utf8.encode(dataString)) + ".yourJWTSignature";
     return "https://moneyme.yapily.com?payment=" + jwt;
   }
 

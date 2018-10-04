@@ -7,16 +7,6 @@ import 'package:ipisp/yapily_config.dart';
 import 'package:yapily_sdk/api.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:uuid/uuid.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-String basepath = "https://api.yapily.com:443";
-String appplicationUuid = '32e45370-1fe8-44b1-be15-2e779ac1105a';
-String applicationSecret = '0e3cd402-6c56-48d8-bcd7-894fa089694e';
-HttpBasicAuth httpBasicAuth = HttpBasicAuth.setCredentials(username: appplicationUuid, password: applicationSecret);
-String userUuid = 'a4bdd948-377d-49c2-ab3f-930a8f5c1a7f';
-String callback = "moneyme://whatever/";
-ApiClient apiClient = ApiClient.withAuth(httpBasicAuth);
 
 class SelectInstitution {
 
