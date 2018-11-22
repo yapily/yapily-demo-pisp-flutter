@@ -173,6 +173,6 @@ class _RequestMoneyFormState extends State<RequestMoneyForm> {
             customMetadata: <String, String>{'activity': 'test'},
           ),
         );
-    return (await uploadTask.future).downloadUrl.toString();
+    //return (await uploadTask.onComplete).downloadUrl.toString();
   }
 }

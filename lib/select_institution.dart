@@ -135,7 +135,6 @@ class SelectInstitution {
   void openAsyncUrl(Institution institution) {
 
       sortCodePaymentRequest = new SortCodePaymentRequest();
-      sortCodePaymentRequest.paymentReferenceId = new Uuid().v4().toString().replaceAll("-", "");
       sortCodePaymentRequest.senderAccountId = "9bd5ae68-2266-4dad-865b-4980550a72b7";
       sortCodePaymentRequest.accountNumber = paymentData.accountNumber;
       sortCodePaymentRequest.sortCode = paymentData.sortCode;
@@ -155,7 +154,13 @@ class SelectInstitution {
       }
       sortCodePaymentRequest.amount = num.parse(paymentData.amount);
 
-    _createPaymentInitiation(institution.id, sortCodePaymentRequest, userUuid, yapilyConfig.callback).then((apiResponse) {
+      SortCodePaymentAuthRequest sortCodePaymentAuthRequest = new SortCodePaymentAuthRequest();
+      sortCodePaymentAuthRequest.userUuid = userUuid;
+      sortCodePaymentAuthRequest.callback = yapilyConfig.callback;
+      sortCodePaymentAuthRequest.institutionId = institution.id;
+      sortCodePaymentAuthRequest.paymentRequest = sortCodePaymentRequest;
+
+    _createPaymentInitiation(sortCodePaymentAuthRequest).then((apiResponse) {
 
           Navigator.of(selectInstitutionContext).push(
               new MaterialPageRoute(
@@ -177,7 +182,7 @@ class SelectInstitution {
               )
           );
           isOnWebView = true;
-          flutterWebviewPlugin.launch(apiResponse.data.authUrl,
+          flutterWebviewPlugin.launch(apiResponse.data.authorisationUrl,
               rect: new Rect.fromLTWH(
                   0.0,
                   80.0,
@@ -195,11 +200,10 @@ class SelectInstitution {
   void _registerWebViewListener() {
     flutterWebviewPlugin.onUrlChanged.listen((String url) {
       if(url.contains(yapilyConfig.callback) && isOnWebView) {
-        String consentLookupString = 'consent=';
-        if (url.contains(consentLookupString)) {
-          int indexOfConsent = url.indexOf(consentLookupString);
-          String consent = url.substring(
-              indexOfConsent + consentLookupString.length, url.length);
+        String consentParameter = 'consent';
+        Uri callbackUri = Uri.parse(url);
+        if(callbackUri.queryParameters.containsKey(consentParameter)) {
+          String consent = callbackUri.queryParameters[consentParameter].toString();
           flutterWebviewPlugin.close();
           flutterWebviewPlugin.dispose();
           this.isOnWebView = false;
@@ -245,10 +249,10 @@ class SelectInstitution {
     });
   }
 
-  Future<ApiResponseOfPaymentResponse> _createPaymentInitiation(String id, SortCodePaymentRequest paymentRequest, String userUuid, String callback) {
+  Future<ApiResponseOfAuthorisationRequestResponse> _createPaymentInitiation(SortCodePaymentAuthRequest paymentRequest) {
     var apiClientFactory = ApiClientFactory.create();
     return apiClientFactory.then( (apiClient) {
-      return new PaymentsApi(apiClient).createPaymentInitiationUsingPOST(id,paymentRequest: sortCodePaymentRequest, userUuid: userUuid, callback: callback);
+      return new PaymentsApi(apiClient).createPaymentInitiationUsingPOST(paymentAuthRequest: paymentRequest);
     });
   }
 
